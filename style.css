@@ -166,18 +166,14 @@
 
 @media only screen and (max-width:1200px){
 	#virtualKeyboardChromeExtension [_key=Backspace].kbdClick span {
-		background-image: url(chrome-extension://__MSG_@@extension_id__/icons/backspace.png) !important;
-		font-size: 0px !important;
-		color: transparent !important;
-		text-shadow: none !important;
+		background-image: url(chrome-extension://__MSG_@@extension_id__/icons/backspace-s.png) !important;
+		font-size: 20px !important;
 	}
 }
 @media only screen and (max-width:1200px){
 	#virtualKeyboardChromeExtension [_key=Enter].kbdClick span {
-		background-image: url(chrome-extension://__MSG_@@extension_id__/icons/enter.png) !important;
-		font-size: 0px !important;
-		color: transparent !important;
-		text-shadow: none !important;
+		/*background-image: url(chrome-extension://__MSG_@@extension_id__/icons/enter.png) !important;*/
+		font-size: 20px !important;
 	}
 }
 
