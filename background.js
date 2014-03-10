@@ -5,7 +5,12 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
 	} 
 	else if (request.method == "getSmallKeyboardCoords")
 	{
-		sendResponse({smallKeyboard: localStorage["smallKeyboard"], smallKeyboardTop: localStorage["smallKeyboardTop"], smallKeyboardBottom: localStorage["smallKeyboardBottom"], smallKeyboardRight: localStorage["smallKeyboardRight"], smallKeyboardLeft: localStorage["smallKeyboardLeft"]});
+		sendResponse({smallKeyboard: localStorage["smallKeyboard"],
+            smallKeyboardTop: localStorage["smallKeyboardTop"],
+            smallKeyboardBottom: localStorage["smallKeyboardBottom"],
+            smallKeyboardRight: localStorage["smallKeyboardRight"],
+            smallKeyboardLeft: localStorage["smallKeyboardLeft"],
+            anchorOffset: localStorage["anchorOffset"]});
 	}
 	else if (request.method == "loadKeyboardSettings")
 	{
