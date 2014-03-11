@@ -74,13 +74,20 @@ window.addEventListener('load', function() {
 			if (localStorage[sk] == "true") {
 				c[i].checked = true;
 			}
-		} if (c[i].getAttribute("type") == "range") {
-			if (localStorage[sk] == undefined) {
-				c[i].value = 0;	
-			} else {
-				c[i].value = localStorage[sk];	
-			}
-		} else {
+		} else if (c[i].getAttribute("type") == "range") {
+            if (localStorage[sk] == undefined) {
+                c[i].value = 0;
+            } else {
+                c[i].value = localStorage[sk];
+            }
+        } else if (c[i].getAttribute("type") == "radio") {
+            if ((localStorage[sk] == undefined) && (c[i].getAttribute("_default") != undefined)) {
+                localStorage[sk] = c[i].getAttribute("_default");
+            }
+            if (localStorage[sk] == c[i].value) {
+                c[i].checked = true;
+            }
+        } else {
 			c[i].value = localStorage[sk];	
 		}
 		c[i].onchange = function() {
@@ -90,7 +97,9 @@ window.addEventListener('load', function() {
 					localStorage[skey] = this.getAttribute("_default");
 				}
 				localStorage[skey] = this.checked ? "true" : "false";
-			} else {
+			} else if (this.getAttribute("type") == "radio" && this.checked) {
+                localStorage[skey] = this.value;
+            } else {
 				localStorage[skey] = this.value;
 			}
 			document.getElementById("changeEffect").className = "show";

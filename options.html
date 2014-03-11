@@ -74,7 +74,7 @@ h2 {
 	box-shadow: 0px 0px 10px rgba(0,0,0,0.07);
 	z-index: 100;
 }
- select, input[type='checkbox'], input[type='radio'] {
+ select, input[type='checkbox'] {
 	-webkit-appearance: none;
 	-webkit-user-select: none;
 	background-image: -webkit-linear-gradient(#ededed, #ededed 38%, #dedede);
@@ -91,7 +91,7 @@ select, select:hover, select:focus {
 	box-shadow: inset 1px 1px 5px rgba(0,0,0,0.1);
 	background-image: none !important;
 }
-:enabled:hover:-webkit-any( select, input[type='checkbox'], input[type='radio'], :-webkit-any( button, input[type='button'], input[type='submit']):not(.custom-appearance):not(.link-button)) {
+:enabled:hover:-webkit-any( select, input[type='checkbox'], :-webkit-any( button, input[type='button'], input[type='submit']):not(.custom-appearance):not(.link-button)) {
 	background-image: -webkit-linear-gradient(#f0f0f0, #f0f0f0 38%, #e0e0e0);
 	border-color: rgba(0, 0, 0, 0.3);
 	box-shadow: 0 1px 0 rgba(0, 0, 0, 0.12), inset 0 1px 2px rgba(255, 255, 255, 0.95);
@@ -106,7 +106,7 @@ input[type='checkbox']:checked::before {
 	height: 100%;
 	width: 100%;
 }
-input[type='checkbox'] {
+input[type='checkbox'], input[type='radio'] {
 	bottom: 2px;
 	height: 13px;
 	position: relative;
@@ -200,6 +200,11 @@ button {
 button:active {
   background-image: -webkit-linear-gradient(#e7e7e7, #e7e7e7 38%, #d7d7d7);
 }
+
+    #anchorOffset {
+        width: 60px;
+    }
+
 </style>
 <script src="options.js"></script>
 </head>
@@ -259,6 +264,10 @@ button:active {
 		<label><input type="checkbox" id="toogleKeyboard" _setting="toogleKeyboard" class="setting" value="true" _default="true" /> Enable Toggle Keyboard page action (Keyboard icon in URL bar)</label>
 		<label><input type="checkbox" id="urlButton" _setting="urlButton" class="setting" value="true" /> Enable URL Button (Allows you to type a new website address using this keyboard)</label>
 		<label><input type="checkbox" id="smallKeyboard" _setting="smallKeyboard" class="setting" value="true" _changed="checkbox_smallKeyboard" /> Enable Small Keyboard Layout (Can also be moved!)</label>
+        <label>
+            Offset from bottom of screen
+            <input type="number" id="anchorOffset" _setting="anchorOffset" class="setting"  _default="0" /> pixels
+        </label>
 		<label id="zoomLevelLabel"><span style="vertical-align: top;">Zoom level: </span> <input type="range" min="0" max="1.8" step="0.05" id="zoomLevel" _setting="zoomLevel" style="width: 260px" class="setting" value="0" _default="0" _changed="slider_zoom" /> <span style="vertical-align: top;" id="zoomLevelValue"></span></label>
 	</div>
 </div>
