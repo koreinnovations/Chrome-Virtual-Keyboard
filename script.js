@@ -503,7 +503,7 @@ function virtualKeyboardChromeExtension_inputTypesRender() {
         document.getElementById("virtualKeyboardChromeExtensionMainKbd").style.display = "";
         document.getElementById("virtualKeyboardChromeExtensionMainNumbers").style.display = "none";
         virtualKeyboardChromeClassStyleDisplay("kbEmailInput", "none");
-        if (virtualKeyboardChromeExtensionClickedElem.type == "number") {
+        if (virtualKeyboardChromeExtensionClickedElem.type == "number" || virtualKeyboardChromeExtensionClickedElem.type == "tel") {
             document.getElementById("virtualKeyboardChromeExtensionNumberBarKbdInput").style.display = "";
             document.getElementById("virtualKeyboardChromeExtensionMainKbd").style.display = "none";
         } else if (virtualKeyboardChromeExtensionClickedElem.type == "email") {
@@ -858,7 +858,7 @@ function init_virtualKeyboardChromeExtension(firstTime) {
     if (virtualKeyboardChromeExtensionTouchEvents != undefined) {
         var e = document.getElementsByTagName("input");
         for (var i = 0; i < e.length; i++) {
-            if ((e[i].type == "text") || (e[i].type == "password") || (e[i].type == "search") || (e[i].type == "email") || (e[i].type == "number") || (e[i].type == "date") || (e[i].type == "url")) {
+            if ((e[i].type == "text") || (e[i].type == "password") || (e[i].type == "search") || (e[i].type == "email") || (e[i].type == "number") || (e[i].type == "tel") || (e[i].type == "date") || (e[i].type == "url")) {
                 if (e[i].getAttribute("_vkEnabled") == undefined) {
                     e[i].setAttribute("_vkEnabled", "true");
                     e[i].addEventListener("blur", vk_evt_input_blur, false);
