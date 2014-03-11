@@ -52,6 +52,12 @@ function spliceCharacter(el, character) {
     }
 }
 
+function dispatchInputEvent() {
+    var keyboardEvent = document.createEvent("Event");
+    keyboardEvent.initEvent("input", true, false);
+    virtualKeyboardChromeExtensionClickedElem.dispatchEvent(keyboardEvent);
+}
+
 function virtualKeyboardChromeExtension_generate_onchange() {
     if (virtualKeyboardChromeExtensionElemChanged == true) {
         virtualKeyboardChromeExtensionElemChanged = false;
@@ -178,6 +184,7 @@ function virtualKeyboardChromeExtension_click(key, skip) {
                 if (virtualKeyboardChromeExtensionClickedElem != null) {
                     if (virtualKeyboardChromeExtensionElemType == "textarea") {
                         spliceCharacter(virtualKeyboardChromeExtensionClickedElem, "\n");
+                        dispatchInputEvent();
                     } else {
 
                         var form = virtualKeyboardChromeExtension_getParentByTagName(virtualKeyboardChromeExtensionClickedElem, "form");
@@ -290,6 +297,7 @@ function virtualKeyboardChromeExtension_click(key, skip) {
                 } catch (e) {
 
                 }
+                dispatchInputEvent();
                 virtualKeyboardChromeExtensionElemChanged = true;
                 break;
             default:
@@ -308,13 +316,17 @@ function virtualKeyboardChromeExtension_click(key, skip) {
                         key.charCodeAt(0), // keyCodeArg : unsigned long the virtual key code, else 0
                         0 // charCodeArgs : unsigned long the Unicode character associated with the depressed key, else 0
                     );
-                    virtualKeyboardChromeExtensionClickedElem.dispatchEvent(keyboardEvent);
+
                     if (virtualKeyboardChromeExtensionShift) {
                         if ((key.charCodeAt(0) >= 97) && (key.charCodeAt(0) <= 122)) {
                             key = String.fromCharCode(key.charCodeAt(0) - 32);
                         }
                     }
                     spliceCharacter(virtualKeyboardChromeExtensionClickedElem, key);
+
+                    dispatchInputEvent();
+
+                    virtualKeyboardChromeExtensionClickedElem.dispatchEvent(keyboardEvent);
                     virtualKeyboardChromeExtensionElemChanged = true;
                     if ((virtualKeyboardChromeExtensionShift) && (virtualKeyboardChromeExtensionShiftBehaviour)) {
                         virtualKeyboardChromeExtensionShift = !virtualKeyboardChromeExtensionShift;
