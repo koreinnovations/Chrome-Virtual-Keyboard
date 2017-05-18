@@ -28,6 +28,7 @@ chrome.extension.onRequest.addListener(function (request, sender, sendResponse) 
       hardwareAcceleration: localStorage["hardwareAcceleration"],
       zoomLevel: localStorage["zoomLevel"],
       autoTrigger: localStorage["autoTrigger"],
+      repeatLetters: localStorage["repeatLetters"],
       intelligentScroll: localStorage["intelligentScroll"],
       autoTriggerLinks: localStorage["autoTriggerLinks"],
       autoTriggerAfter: localStorage["autoTriggerAfter"]

@@ -3,7 +3,7 @@ function kl_add() {
   for (var i = 0; i < o.length; i++) {
     if (o[i].selected) {
       var opt = document.createElement("option");
-      opt.text = o[i].innerText;
+      opt.text = o[i].innerHTML;
       opt.value = o[i].value;
       var os = document.getElementById("sl").options;
       var exists = false;
@@ -24,7 +24,7 @@ function kl_save() {
   var o = document.getElementById("sl").options;
   for (var i = 0; i < o.length; i++) {
     if (o[i].value != undefined) {
-      a.push({ value: o[i].value, name: o[i].innerText });
+      a.push({ value: o[i].value, name: o[i].innerHTML });
     }
   }
   localStorage["keyboardLayoutsList"] = JSON.stringify(a);
@@ -59,58 +59,57 @@ function kl_remove() {
   }
   kl_save();
 }
-window.addEventListener('load', function () {
-  document.body.className = "loaded";
-  kl_load();
-  document.getElementById("kl_remove").addEventListener("click", kl_remove, false);
-  document.getElementById("kl_add").addEventListener("click", kl_add, false);
-  var c = document.getElementsByClassName("setting");
-  for (var i = 0; i < c.length; i++) {
-    var sk = c[i].getAttribute("_setting");
-    if (c[i].getAttribute("type") == "checkbox") {
-      if ((localStorage[sk] == undefined) && (c[i].getAttribute("_default") != undefined)) {
-        localStorage[sk] = c[i].getAttribute("_default");
-      }
-      if (localStorage[sk] == "true") {
-        c[i].checked = true;
-      }
-    } else if (c[i].getAttribute("type") == "range") {
-      if (localStorage[sk] == undefined) {
-        c[i].value = 0;
-      } else {
-        c[i].value = localStorage[sk];
-      }
-    } else if (c[i].getAttribute("type") == "radio") {
+window.addEventListener('load', function() {
+	document.body.className = "loaded";
+	kl_load();
+	document.getElementById("kl_remove").addEventListener("click", kl_remove, false);
+	document.getElementById("kl_add").addEventListener("click", kl_add, false);
+	var c = document.getElementsByClassName("setting");
+	for (var i=0; i<c.length; i++) {
+		var sk = c[i].getAttribute("_setting");	
+		if (c[i].getAttribute("type") == "checkbox") {
+			if ((localStorage[sk] == undefined) && (c[i].getAttribute("_default") != undefined)) {
+				localStorage[sk] = c[i].getAttribute("_default");
+			}
+			if (localStorage[sk] == "true") {
+				c[i].checked = true;
+			}
+		}else if (c[i].getAttribute("type") == "range") {
+			if (localStorage[sk] == undefined) {
+				c[i].value = 0;
+			} else {
+				c[i].value = localStorage[sk];
+			}
+		} else if (c[i].getAttribute("type") == "radio") {
       if ((localStorage[sk] == undefined) && (c[i].getAttribute("_default") != undefined)) {
         localStorage[sk] = c[i].getAttribute("_default");
       }
       if (localStorage[sk] == c[i].value) {
         c[i].checked = true;
       }
-    } else {
-      c[i].value = localStorage[sk];
-    }
-    c[i].onchange = function () {
-      var skey = this.getAttribute("_setting");
-      if (this.getAttribute("type") == "checkbox") {
-        if ((localStorage[skey] == undefined) && (this.getAttribute("_default") != undefined)) {
-          localStorage[skey] = this.getAttribute("_default");
-        }
-        localStorage[skey] = this.checked ? "true" : "false";
-      } else if (this.getAttribute("type") == "radio" && this.checked) {
+    } else{
+			c[i].value = localStorage[sk];
+		}
+		c[i].onchange = function() {
+			var skey = this.getAttribute("_setting");
+			if (this.getAttribute("type") == "checkbox") {
+				if ((localStorage[skey] == undefined) && (this.getAttribute("_default") != undefined)) {
+					localStorage[skey] = this.getAttribute("_default");
+				}
+				localStorage[skey] = this.checked ? "true" : "false";} else if (this.getAttribute("type") == "radio" && this.checked) {
         localStorage[skey] = this.value;
-      } else {
-        localStorage[skey] = this.value;
-      }
-      document.getElementById("changeEffect").className = "show";
-      if (this.getAttribute("_changed") != undefined) {
-        callFunc(this.getAttribute("_changed"));
-      }
-    }
-    if (c[i].getAttribute("_changed") != undefined) {
-      callFunc(c[i].getAttribute("_changed"));
-    }
-  }
+			} else {
+				localStorage[skey] = this.value;
+			}
+			document.getElementById("changeEffect").className = "show";
+			if (this.getAttribute("_changed") != undefined) {
+				callFunc(this.getAttribute("_changed"));
+			}
+		}
+		if (c[i].getAttribute("_changed") != undefined) {
+			callFunc(c[i].getAttribute("_changed"));
+		}
+	}
 }, false);
 
 function callFunc(callback) {

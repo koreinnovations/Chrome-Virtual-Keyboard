@@ -2,11 +2,11 @@
   "name": "Touch Kiosk Keyboard",
   "description": "Keyboard optimized for touch screen kiosk apps",
   "manifest_version": 2,
-  "version": "1.0.0",
+  "version": "1.11.1",
   "icons": {
-    "16": "icon.png",
-    "48": "icon.png",
-    "128": "icon.png"
+    "16": "keyboard.png",
+    "48": "keyboard.png",
+    "128": "keyboard.png"
   },
   "background": {
     "scripts": [
