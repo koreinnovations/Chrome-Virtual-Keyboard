@@ -449,11 +449,18 @@ function virtualKeyboardChromeExtension_open_part2(pos) {
       document.getElementById('virtualKeyboardChromeExtension').style.top = "";
       document.getElementById('virtualKeyboardChromeExtension').style.left = "";
       document.getElementById('virtualKeyboardChromeExtension').style.right = "";
+
+      var bottom;
+      if (response.anchorOffset != undefined) {
+        bottom = response.anchorOffset;
+      } else {
+        bottom = 0;
+      }
+
       if (hardwareAcceleration) {
         document.getElementById('virtualKeyboardChromeExtension').style.setProperty("-webkit-transform", "translate3d(0,0,0)");
-      } else {
-        document.getElementById('virtualKeyboardChromeExtension').style.bottom = "0px";
       }
+      document.getElementById('virtualKeyboardChromeExtension').style.bottom = bottom + "px";
       document.getElementById("virtualKeyboardChromeExtension").style.setProperty("-webkit-transition", "");
     }
     document.getElementById('virtualKeyboardChromeExtension').style.display = "";
